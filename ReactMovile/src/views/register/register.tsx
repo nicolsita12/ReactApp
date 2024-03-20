@@ -1,11 +1,14 @@
 import React from 'react'
-import { useNavigation } from '@react-navigation/native';
 import { View, Text, StyleSheet, Image, TextInput, ToastAndroid, Touchable,
 TouchableOpacity } from 'react-native';
-import { RoundedButton } from '../../presentation/components/RoundedButton';
-import { StackNavigationProp } from '@react-navigation/stack';
-import { RootStackParamList } from '../../../App';
+import { RoundedButton } from
+'../../presentation/components/RoundedButton';
+import useViewModel from '../../views/register/viewModel';
+import { CustomTextInput } from
+'../../presentation/components/CusatomTextInput';
 export const RegisterScreen = () => {
+const { name, lastname, phone, email, password, confirmPassword, onChange,
+register } = useViewModel();
 return (
 <View style={styles.container}>
 <Image
@@ -21,71 +24,58 @@ style={styles.logoImage}
 </View>
 <View style={styles.form}>
 <Text style={styles.formText}>REGISTRARSE</Text>
-<View style={styles.formInput}>
-<Image style={styles.formIcon}
-source={require('../../../assets/user.png')}
-/>
-<TextInput
-style={styles.formTextInput}
+<CustomTextInput
+image={require('../../../assets/user.png')}
 placeholder='Nombres'
 keyboardType='default'
+property='name'
+onChangeText={onChange}
+value={name}
 />
-</View>
-<View style={styles.formInput}>
-<Image style={styles.formIcon}
-source={require('../../../assets/my_user.png')}
-/>
-<TextInput
-style={styles.formTextInput}
+<CustomTextInput
+image={require('../../../assets/my_user.png')}
 placeholder='Apellidos'
 keyboardType='default'
+property='lastname'
+onChangeText={onChange}
+value={lastname}
 />
-</View>
-<View style={styles.formInput}>
-<Image style={styles.formIcon}
-source={require('../../../assets/email.png')}
-/>
-<TextInput
-style={styles.formTextInput}
+<CustomTextInput
+image={require('../../../assets/email.png')}
 placeholder='Correo electrónico'
 keyboardType='email-address'
+property='email'
+onChangeText={onChange}
+value={email}
 />
-</View>
-<View style={styles.formInput}>
-<Image style={styles.formIcon}
-source={require('../../../assets/phone.png')}
-/>
-<TextInput
-style={styles.formTextInput}
+<CustomTextInput
+image={require('../../../assets/phone.png')}
 placeholder='Teléfono'
 keyboardType='numeric'
+property='phone'
+onChangeText={onChange}
+value={phone}
 />
-</View>
-<View style={styles.formInput}>
-<Image style={styles.formIcon}
-source={require('../../../assets/password.png')}
-/>
-<TextInput
-style={styles.formTextInput}
+<CustomTextInput
+image={require('../../../assets/password.png')}
 placeholder='Contraseña'
 keyboardType='default'
+property='password'
+onChangeText={onChange}
+value={password}
 secureTextEntry={true}
 />
-</View>
-<View style={styles.formInput}>
-<Image style={styles.formIcon}
-source={require('../../../assets/confirm_password.png')}
-/>
-<TextInput
-style={styles.formTextInput}
+<CustomTextInput
+image={require('../../../assets/confirm_password.png')}
 placeholder='Confirmar Contraseña'
 keyboardType='default'
+property='confirmPassword'
+onChangeText={onChange}
+value={confirmPassword}
 secureTextEntry={true}
 />
-</View>
 <View style={{ marginTop: 30 }}>
-<RoundedButton text='CONFIRMAR' onPress={() =>
-ToastAndroid.show('HOLA!', ToastAndroid.SHORT)} />
+<RoundedButton text='CONFIRMAR' onPress={() => register()} />
 </View>
 </View>
 </View>

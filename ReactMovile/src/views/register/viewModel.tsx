@@ -1,15 +1,23 @@
-import React, {useState} from 'react'
-const HomeViewModel = () => {
+import React, { useState } from 'react'
+const RegisterViewModel = () => {
 const [values, setValues] = useState({
-email:'',
-password:'',
+name: '',
+lastname: '',
+phone: '',
+email: '',
+password: '',
+confirmPassword: '',
 });
 const onChange = (property: string, value: any) => {
-setValues({...values, [property]: value});
+setValues({ ...values, [property]: value });
+}
+const register = () => {
+console.log(JSON.stringify(values));
 }
 return {
 ...values,
-onChange
+onChange,
+register
 }
 }
-export default HomeViewModel;
+export default RegisterViewModel;
